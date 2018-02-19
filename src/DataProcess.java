@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 
 public class DataProcess {
-	static String qry="select avg(win_by_wickets),min(win_by_runs),city from ipl.csv where season > 2014"
+	static String qry="select avg(win_by_wickets),min(win_by_runs),city from ipl.csv where season < 2014 and id<100"
 			+"";
 	public static void start(){
 		

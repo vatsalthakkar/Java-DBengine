@@ -13,7 +13,9 @@ public class Main {
 		DataProcess dp=new DataProcess();
 		//list for storing the data of each match
 		List<Data> matchData = new ArrayList<Data>();
-		line = reader.readLine();
+		String header = reader.readLine();
+		String head[]=header.split(",");
+		//dp.printArray(head);
 		//System.out.println(line);
 		while ((line = reader.readLine()) != null) {
 			Data match = new Data();
@@ -49,8 +51,10 @@ public class Main {
 					match.setWin_by_wickets(Integer.parseInt(data));
 				else if (index == 13)
 					match.setPlayer_of_match(data);
-				else if (index == 14)
+				else if (index == 14) {
 					match.setVenue(data);
+					index--;
+				}
 				else if (index ==15 )
 					match.setUmpire1(data);
 				else if (index == 16)
@@ -77,7 +81,6 @@ public class Main {
 		ArrayList<String> conds=dp.getConditions(dp.getFilter(dp.getWords(dp.qry)), logOp);
 		int n=conds.size();
 		int m=matchData.size();
-		System.out.println(conds.get(0));
 		
 		//System.out.println("size"+n);
 		
@@ -100,13 +103,43 @@ public class Main {
 				op="le";
 				temp=conds.get(i).split("<=");
 			}
-			System.out.println(temp[0]);
+			int c=0;
 			for(int j=0;j<m;j++){
-				if(matchData.get(j).season>Integer.parseInt(temp[1])){
-					//System.out.println(matchData.get(j));
+				if(op.equals("g")) {
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
+					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1])){
+						System.out.println("count "+c+" "+matchData.get(j).toString());
+						c++;
+					}
+				}
+				if(op.equals("ge")) {
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
+					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>=Integer.parseInt(temp[1])){
+						System.out.println("count "+c+" "+matchData.get(j).toString());
+						c++;
+					}
+				}
+				if(op.equals("l")) {
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
+					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))<Integer.parseInt(temp[1])){
+						//System.out.println("count "+c+" "+matchData.get(j).toString());
+						c++;
+					}
+				}
+				if(op.equals("le")) {
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
+					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
+					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))<=Integer.parseInt(temp[1])){
+						//System.out.println("count "+c+" "+matchData.get(j).toString());
+						c++;
+					}
 				}
 			}
+			
 		}
-		
+		System.out.println(matchData.get(34).getUmpire1());
 	}
 }
