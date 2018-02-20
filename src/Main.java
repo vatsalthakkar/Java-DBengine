@@ -15,6 +15,13 @@ public class Main {
 		List<Data> matchData = new ArrayList<Data>();
 		String header = reader.readLine();
 		String head[]=header.split(",");
+		String [] intHead1=new String[] {"id","season","dl_applied","win_by_runs","win_by_wickets",};
+		List<String> intHead = Arrays.asList(intHead1);
+		
+		String [] stringHead1= new String[]{"city","date","team1","team2","toss_winner",
+						"toss_decision","result","winner","player_of_match",
+						"venue","umpire1","umpire2","umpire3"};
+		List<String> stringHead = Arrays.asList(stringHead1);
 		//dp.printArray(head);
 		//System.out.println(line);
 		while ((line = reader.readLine()) != null) {
@@ -103,38 +110,81 @@ public class Main {
 				op="le";
 				temp=conds.get(i).split("<=");
 			}
-			int c=0;
+			int k=dp.selectedFields.size();
 			for(int j=0;j<m;j++){
 				if(op.equals("g")) {
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
-					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1])){
-						System.out.println("count "+c+" "+matchData.get(j).toString());
-						c++;
+					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]))
+					{
+						
+						for(int z=0;z<k;z++) {
+							
+							if(intHead.contains(dp.selectedFields.get(z))) {
+								
+								System.out.print(matchData.get(j).hmap1.get(dp.selectedFields.get(z))+" ");
+							}
+							if(stringHead.contains(dp.selectedFields.get(z))) {
+								System.out.print(matchData.get(j).hmap2.get(dp.selectedFields.get(z))+" ");
+							}
+							
+						}
+						System.out.println();
 					}
+					
 				}
 				if(op.equals("ge")) {
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
 					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>=Integer.parseInt(temp[1])){
-						System.out.println("count "+c+" "+matchData.get(j).toString());
-						c++;
+						for(int z=0;z<k;z++) {
+							
+							if(intHead.contains(dp.selectedFields.get(z))) {
+								
+								System.out.print(matchData.get(j).hmap1.get(dp.selectedFields.get(z))+" ");
+							}
+							if(stringHead.contains(dp.selectedFields.get(z))) {
+								System.out.print(matchData.get(j).hmap2.get(dp.selectedFields.get(z))+" ");
+							}
+							
+						}
+						System.out.println();
 					}
 				}
 				if(op.equals("l")) {
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
 					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))<Integer.parseInt(temp[1])){
-						//System.out.println("count "+c+" "+matchData.get(j).toString());
-						c++;
+						for(int z=0;z<k;z++) {
+							
+							if(intHead.contains(dp.selectedFields.get(z))) {
+								
+								System.out.print(matchData.get(j).hmap1.get(dp.selectedFields.get(z))+" ");
+							}
+							if(stringHead.contains(dp.selectedFields.get(z))) {
+								System.out.print(matchData.get(j).hmap2.get(dp.selectedFields.get(z))+" ");
+							}
+							
+						}
+						System.out.println();
 					}
 				}
 				if(op.equals("le")) {
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase())));
 					//System.out.println(matchData.get(j).hmap1.get((temp[0].toLowerCase()))>Integer.parseInt(temp[1]));
 					if(matchData.get(j).hmap1.get((temp[0].toLowerCase()))<=Integer.parseInt(temp[1])){
-						//System.out.println("count "+c+" "+matchData.get(j).toString());
-						c++;
+						for(int z=0;z<k;z++) {
+							
+							if(intHead.contains(dp.selectedFields.get(z))) {
+								
+								System.out.print(matchData.get(j).hmap1.get(dp.selectedFields.get(z))+" ");
+							}
+							if(stringHead.contains(dp.selectedFields.get(z))) {
+								System.out.print(matchData.get(j).hmap2.get(dp.selectedFields.get(z))+" ");
+							}
+							
+						}
+						System.out.println();
 					}
 				}
 			}

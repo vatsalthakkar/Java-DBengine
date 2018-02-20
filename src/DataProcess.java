@@ -3,9 +3,14 @@ import java.util.Arrays;
 
 
 public class DataProcess {
-	static String qry="select avg(win_by_wickets),min(win_by_runs),city from ipl.csv where season < 2014 and id<100"
+	static String qry="select id,win_by_runs,season,winner from ipl.csv where id<10"
 			+"";
-	public static void start(){
+	
+	public  void setQry(String query) {
+		qry=query;
+	}
+	ArrayList<String> selectedFields=null;
+	public  void start(){
 		
 	
 		String []  words=getWords(qry);
@@ -23,8 +28,10 @@ public class DataProcess {
 		System.out.println("Conditions are: "+ conditions);
 		System.out.println("Logical Ops are: "+logOp);
 		
-		ArrayList<String> selectedFields=getSelectedFields(base);
+		selectedFields=getSelectedFields(base);
 		System.out.println("The selected fields are: "+selectedFields);
+		//System.out.println(selectedFields.get(1));
+		
 		
 		String groupBy = getGroupby(filter);
 		System.out.println("Group By: "+groupBy);
@@ -35,19 +42,19 @@ public class DataProcess {
 		ArrayList<String> agg = getAgg(base);
 		System.out.println("Aggregates functions in query are: "+agg);
 	}
-	public static String[] getWords(String qry) {
+	public  String[] getWords(String qry) {
 		
 		String [] words=qry.split(" ");
 		return words;
 	}
-	public static void printArray(String [] array) {
+	public  void printArray(String [] array) {
 		int n = array.length;
 		for(int i=0;i<n;i++) 
 			System.out.println(array[i]);
 		
 		System.out.println();
 	}
-	public static ArrayList<String> getFileName(String [] words) {
+	public  ArrayList<String> getFileName(String [] words) {
 		ArrayList<String> fileName=new ArrayList<String>();
 		int n=words.length;
 		for(int i=0;i<n;i++) {
@@ -58,7 +65,7 @@ public class DataProcess {
 		return fileName;
 	}
 	
-	public static String getBase(String [] words) {
+	public  String getBase(String [] words) {
 		int n=words.length;
 		String base="";
 		int whrIndex=-1;
@@ -74,7 +81,7 @@ public class DataProcess {
 		return base;
 	}
 	
-	public static String getFilter(String [] words) {
+	public  String getFilter(String [] words) {
 		String filter="";
 		int n=words.length;
 		int whrIndex=-1;
@@ -90,7 +97,7 @@ public class DataProcess {
 		return filter;
 	}
 	
-	public static ArrayList<String> getConditions(String filter, ArrayList<String> logOp) {
+	public  ArrayList<String> getConditions(String filter, ArrayList<String> logOp) {
 		String [] conds=filter.split(" ");
 		ArrayList<String> conditions = new ArrayList<String>();
 		int n=conds.length;
@@ -115,7 +122,7 @@ public class DataProcess {
 			conditions.add(temp);
 		return conditions;
 	}
-	public static ArrayList<String> getSelectedFields(String base){
+	public  ArrayList<String> getSelectedFields(String base){
 		String [] temp=base.split(" ");
 		if(temp.length>=0 && temp[0].equalsIgnoreCase("select")){
 			String [] temp1=temp[1].split(",");
@@ -129,7 +136,7 @@ public class DataProcess {
 		}
 		return null;
 	}
-	public static String getGroupby(String filter){
+	public  String getGroupby(String filter){
 		String [] temp1 = filter.split(("(?i)group by"));
 		String [] temp = null;
 		if(temp1.length>1) temp = temp1[1].split((" "));
@@ -137,7 +144,7 @@ public class DataProcess {
 			return temp[1];
 		return "";
 	}
-	public static String getOrderby(String filter){
+	public  String getOrderby(String filter){
 		String [] temp1 = filter.split(("(?i)order by"));
 		String [] temp=null;
 		if(temp1.length>1) temp = temp1[1].split((" "));
@@ -145,7 +152,7 @@ public class DataProcess {
 			return temp[1];
 		return "";
 	}
-	public static ArrayList<String> getAgg(String base){
+	public ArrayList<String> getAgg(String base){
 		ArrayList<String> agg = new ArrayList<String>();
 		String [] temp=base.split(" ");
 		if(temp.length>=0 && temp[0].equalsIgnoreCase("select")){
