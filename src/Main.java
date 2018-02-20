@@ -85,7 +85,7 @@ public class Main {
 		ArrayList<String> logOp = new ArrayList<String>();
 		//dp.start();
 		//System.out.println(dp.getConditions(dp.getFilter(dp.getWords(dp.qry)), logOp).size());
-		ArrayList<String> conds=dp.getConditions(dp.getFilter(dp.getWords(dp.qry)), logOp);
+		ArrayList<String> conds=dp.getConditions(dp.getFilter(dp.getWords()), logOp);
 		int n=conds.size();
 		int m=matchData.size();
 		

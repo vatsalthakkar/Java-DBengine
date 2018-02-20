@@ -9,11 +9,14 @@ public class DataProcess {
 	public  void setQry(String query) {
 		qry=query;
 	}
+	public String getQry() {
+		return qry;
+	}
 	ArrayList<String> selectedFields=null;
 	public  void start(){
 		
 	
-		String []  words=getWords(qry);
+		String []  words=getWords();
 		ArrayList<String> fileName=getFileName(words);
 		System.out.println("Files in the query: " +fileName);
 		
@@ -42,7 +45,7 @@ public class DataProcess {
 		ArrayList<String> agg = getAgg(base);
 		System.out.println("Aggregates functions in query are: "+agg);
 	}
-	public  String[] getWords(String qry) {
+	public  String[] getWords() {
 		
 		String [] words=qry.split(" ");
 		return words;
