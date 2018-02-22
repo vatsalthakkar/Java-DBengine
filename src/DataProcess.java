@@ -54,7 +54,6 @@ public class DataProcess {
 		int n = array.length;
 		for(int i=0;i<n;i++) 
 			System.out.println(array[i]);
-		
 		System.out.println();
 	}
 	public  ArrayList<String> getFileName(String [] words) {
